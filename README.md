@@ -1,6 +1,13 @@
 # Simulator project for LVGL embedded GUI Library
 
-LVGL v8.3 模拟器，运行方法：VS 打开 CMake 文件，点击运行 demo.exe。
+LVGL v8.3 模拟器，基于以下仓库：
+* https://github.com/lvgl/lv_port_pc_vscode/tree/release/v8
+* https://github.com/lvgl/lvgl/tree/release/v8.3
+* https://github.com/lvgl/lv_drivers/tree/release/v8.3
+
+运行方法：
+* VS Code WSLg 环境里：`mkdir build; cd build; cmake ..; make; ./demo`
+* Windows 环境里 VS2019（或以上版本）文件菜单打开 CMake 文件，点击运行 demo.exe
 
 The [LVGL](https://github.com/lvgl/lvgl) is written mainly for microcontrollers and embedded systems however you can run the library **on your PC** as well without any embedded hardware. The code written on PC can be simply copied when your are using an embedded system.
 
