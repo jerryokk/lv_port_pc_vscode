@@ -339,6 +339,7 @@ typedef struct {
  * GLOBAL PROTOTYPES
  **********************/
 
+
 /**
  * Initialize a style
  * @param style pointer to a style to initialize

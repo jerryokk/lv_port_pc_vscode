@@ -1499,6 +1499,39 @@
     #endif
 #endif
 
+#ifndef LV_USE_DCLOCK
+    #ifdef _LV_KCONFIG_PRESENT
+        #ifdef CONFIG_LV_USE_DCLOCK
+            #define LV_USE_DCLOCK CONFIG_LV_USE_DCLOCK
+        #else
+            #define LV_USE_DCLOCK 0
+        #endif
+    #else
+        #define LV_USE_DCLOCK      1
+    #endif
+#endif
+#if LV_USE_DCLOCK
+    #ifndef LV_DCLOCK_TEXT_SELECTION
+        #ifdef CONFIG_LV_DCLOCK_TEXT_SELECTION
+            #define LV_DCLOCK_TEXT_SELECTION CONFIG_LV_DCLOCK_TEXT_SELECTION
+        #else
+            #define LV_DCLOCK_TEXT_SELECTION 1 /*Enable selecting text of the dclock*/
+        #endif
+    #endif
+#endif
+
+#ifndef LV_USE_VIDEO
+    #ifdef _LV_KCONFIG_PRESENT
+        #ifdef CONFIG_LV_USE_VIDEO
+            #define LV_USE_VIDEO CONFIG_LV_USE_VIDEO
+        #else
+            #define LV_USE_VIDEO 0
+        #endif
+    #else
+        #define LV_USE_VIDEO      1
+    #endif
+#endif
+
 #ifndef LV_USE_LINE
     #ifdef _LV_KCONFIG_PRESENT
         #ifdef CONFIG_LV_USE_LINE
@@ -1676,6 +1709,18 @@
     #endif
 #endif  /*LV_USE_CALENDAR*/
 
+#ifndef LV_USE_CAROUSEL
+    #ifdef _LV_KCONFIG_PRESENT
+        #ifdef CONFIG_LV_USE_CAROUSEL
+            #define LV_USE_CAROUSEL CONFIG_LV_USE_CAROUSEL
+        #else
+            #define LV_USE_CAROUSEL 0
+        #endif
+    #else
+        #define LV_USE_CAROUSEL  1
+    #endif
+#endif
+
 #ifndef LV_USE_CHART
     #ifdef _LV_KCONFIG_PRESENT
         #ifdef CONFIG_LV_USE_CHART
@@ -1721,6 +1766,27 @@
         #endif
     #else
         #define LV_USE_KEYBOARD   1
+    #endif
+#endif
+
+#ifndef LV_USE_ZH_KEYBOARD
+    #ifdef _LV_KCONFIG_PRESENT
+        #ifdef CONFIG_LV_USE_ZH_KEYBOARD
+            #define LV_USE_ZH_KEYBOARD CONFIG_LV_USE_ZH_KEYBOARD
+        #else
+            #define LV_USE_ZH_KEYBOARD 0
+        #endif
+    #else
+        #define LV_USE_ZH_KEYBOARD   1
+    #endif
+#endif
+#if LV_USE_ZH_KEYBOARD
+    #ifndef LV_ZH_KEYBOARD_MINI
+        #ifdef CONFIG_LV_ZH_KEYBOARD_MINI
+            #define LV_ZH_KEYBOARD_MINI CONFIG_LV_ZH_KEYBOARD_MINI
+        #else
+            #define LV_ZH_KEYBOARD_MINI   1
+        #endif
     #endif
 #endif
 
@@ -1772,6 +1838,14 @@
     #endif
 #endif
 
+#ifndef LV_USE_ANALOGCLOCK
+#  ifdef CONFIG_LV_USE_ANALOGCLOCK
+#    define LV_USE_ANALOGCLOCK CONFIG_LV_USE_ANALOGCLOCK
+#  else
+#    define  LV_USE_ANALOGCLOCK        1
+#  endif
+#endif
+
 #ifndef LV_USE_MSGBOX
     #ifdef _LV_KCONFIG_PRESENT
         #ifdef CONFIG_LV_USE_MSGBOX
@@ -1781,6 +1855,18 @@
         #endif
     #else
         #define LV_USE_MSGBOX     1
+    #endif
+#endif
+
+#ifndef LV_USE_RADIOBTN
+    #ifdef _LV_KCONFIG_PRESENT
+        #ifdef CONFIG_LV_USE_RADIOBTN
+            #define LV_USE_RADIOBTN CONFIG_LV_USE_RADIOBTN
+        #else
+            #define LV_USE_RADIOBTN 0
+        #endif
+    #else
+        #define LV_USE_RADIOBTN   1
     #endif
 #endif
 
@@ -1839,6 +1925,18 @@
         #endif
     #else
         #define LV_USE_TABVIEW    1
+    #endif
+#endif
+
+#ifndef LV_USE_TEXTPROGRESS
+    #ifdef _LV_KCONFIG_PRESENT
+        #ifdef CONFIG_LV_USE_TEXTPROGRESS
+            #define LV_USE_TEXTPROGRESS CONFIG_LV_USE_TEXTPROGRESS
+        #else
+            #define LV_USE_TEXTPROGRESS 0
+        #endif
+    #else
+        #define LV_USE_TEXTPROGRESS 1
     #endif
 #endif
 
@@ -2099,27 +2197,29 @@
     #endif
 #endif
 
-/*API for LittleFS (library needs to be added separately). Uses lfs_file_open, lfs_file_read, etc*/
-#ifndef LV_USE_FS_LITTLEFS
-    #ifdef CONFIG_LV_USE_FS_LITTLEFS
-        #define LV_USE_FS_LITTLEFS CONFIG_LV_USE_FS_LITTLEFS
+/*API for RAWFS (needs to be added separately).*/
+#ifndef LV_USE_FS_RAWFS
+    #ifdef CONFIG_LV_USE_FS_RAWFS
+        #define LV_USE_FS_RAWFS CONFIG_LV_USE_FS_RAWFS
     #else
-        #define LV_USE_FS_LITTLEFS 0
+        #define LV_USE_FS_RAWFS 0
     #endif
 #endif
-#if LV_USE_FS_LITTLEFS
-    #ifndef LV_FS_LITTLEFS_LETTER
-        #ifdef CONFIG_LV_FS_LITTLEFS_LETTER
-            #define LV_FS_LITTLEFS_LETTER CONFIG_LV_FS_LITTLEFS_LETTER
+#if LV_USE_FS_RAWFS
+    #ifndef LV_FS_RAWFS_LETTER
+        #ifdef CONFIG_LV_FS_RAWFS_LETTER
+            #define LV_FS_RAWFS_LETTER CONFIG_LV_FS_RAWFS_LETTER
         #else
-            #define LV_FS_LITTLEFS_LETTER '\0'     /*Set an upper cased letter on which the drive will accessible (e.g. 'A')*/
+            #define LV_FS_RAWFS_LETTER 'F'
         #endif
     #endif
-    #ifndef LV_FS_LITTLEFS_CACHE_SIZE
-        #ifdef CONFIG_LV_FS_LITTLEFS_CACHE_SIZE
-            #define LV_FS_LITTLEFS_CACHE_SIZE CONFIG_LV_FS_LITTLEFS_CACHE_SIZE
-        #else
-            #define LV_FS_LITTLEFS_CACHE_SIZE 0    /*>0 to cache this number of bytes in lv_fs_read()*/
+    #if LV_FS_RAWFS_XIP
+        #ifndef LV_FS_RAWFS_XIP_BASE_ADDR
+            #ifdef CONFIG_LV_FS_RAWFS_XIP_BASE_ADDR
+                #define LV_FS_RAWFS_XIP_BASE_ADDR CONFIG_LV_FS_RAWFS_XIP_BASE_ADDR
+            #else
+                #define LV_FS_RAWFS_XIP_BASE_ADDR 0xFFFFFFFF
+            #endif
         #endif
     #endif
 #endif
@@ -2170,6 +2270,15 @@
     #endif
 #endif
 
+/*Barcode library*/
+#ifndef LV_USE_BARCODE
+    #ifdef CONFIG_LV_USE_BARCODE
+        #define LV_USE_BARCODE CONFIG_LV_USE_BARCODE
+    #else
+        #define LV_USE_BARCODE 0
+    #endif
+#endif
+
 /*FreeType library*/
 #ifndef LV_USE_FREETYPE
     #ifdef CONFIG_LV_USE_FREETYPE
@@ -2213,25 +2322,6 @@
             #else
                 #define LV_FREETYPE_CACHE_FT_SIZES 0
             #endif
-        #endif
-    #endif
-#endif
-
-/*Tiny TTF library*/
-#ifndef LV_USE_TINY_TTF
-    #ifdef CONFIG_LV_USE_TINY_TTF
-        #define LV_USE_TINY_TTF CONFIG_LV_USE_TINY_TTF
-    #else
-        #define LV_USE_TINY_TTF 0
-    #endif
-#endif
-#if LV_USE_TINY_TTF
-    /*Load TTF data from files*/
-    #ifndef LV_TINY_TTF_FILE_SUPPORT
-        #ifdef CONFIG_LV_TINY_TTF_FILE_SUPPORT
-            #define LV_TINY_TTF_FILE_SUPPORT CONFIG_LV_TINY_TTF_FILE_SUPPORT
-        #else
-            #define LV_TINY_TTF_FILE_SUPPORT 0
         #endif
     #endif
 #endif

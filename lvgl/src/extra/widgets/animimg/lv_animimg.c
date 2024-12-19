@@ -3,6 +3,10 @@
  *
  */
 
+/**
+ * Modified by NXP in 2023
+ */
+
 /*********************
  *      INCLUDES
  *********************/
@@ -64,13 +68,18 @@ lv_obj_t * lv_animimg_create(lv_obj_t * parent)
     return obj;
 }
 
-void lv_animimg_set_src(lv_obj_t * obj, const void * dsc[], uint8_t num)
+void lv_animimg_set_src(lv_obj_t * obj, const void * dsc[], uint8_t num, bool reverse)
 {
     LV_ASSERT_OBJ(obj, MY_CLASS);
     lv_animimg_t * animimg = (lv_animimg_t *)obj;
     animimg->dsc = dsc;
     animimg->pic_count = num;
-    lv_anim_set_values(&animimg->anim, 0, num);
+    if(reverse) {
+        lv_anim_set_values(&animimg->anim, num, 0);
+    }
+    else {
+        lv_anim_set_values(&animimg->anim, 0, num);
+    }
 }
 
 void lv_animimg_start(lv_obj_t * obj)
@@ -79,6 +88,14 @@ void lv_animimg_start(lv_obj_t * obj)
     lv_animimg_t * animimg = (lv_animimg_t *)obj;
     lv_anim_start(&animimg->anim);
 }
+
+bool lv_animimg_del(lv_obj_t * obj)
+{
+    LV_ASSERT_OBJ(obj, MY_CLASS);
+    lv_animimg_t * animimg = (lv_animimg_t *)obj;
+    return lv_anim_del(animimg, NULL);
+}
+
 
 /*=====================
  * Setter functions
@@ -89,7 +106,6 @@ void lv_animimg_set_duration(lv_obj_t * obj, uint32_t duration)
     LV_ASSERT_OBJ(obj, MY_CLASS);
     lv_animimg_t * animimg = (lv_animimg_t *)obj;
     lv_anim_set_time(&animimg->anim, duration);
-    lv_anim_set_playback_delay(&animimg->anim, duration);
 }
 
 void lv_animimg_set_repeat_count(lv_obj_t * obj, uint16_t count)
@@ -97,6 +113,34 @@ void lv_animimg_set_repeat_count(lv_obj_t * obj, uint16_t count)
     LV_ASSERT_OBJ(obj, MY_CLASS);
     lv_animimg_t * animimg = (lv_animimg_t *)obj;
     lv_anim_set_repeat_count(&animimg->anim, count);
+}
+
+void lv_animimg_set_playback_time(lv_obj_t * obj, uint16_t duration)
+{
+    LV_ASSERT_OBJ(obj, MY_CLASS);
+    lv_animimg_t * animimg = (lv_animimg_t *)obj;
+    lv_anim_set_playback_time(&animimg->anim, duration);
+}
+
+void lv_animimg_set_playback_delay(lv_obj_t * obj, uint16_t duration)
+{
+    LV_ASSERT_OBJ(obj, MY_CLASS);
+    lv_animimg_t * animimg = (lv_animimg_t *)obj;
+    lv_anim_set_playback_delay(&animimg->anim, duration);
+}
+
+void lv_animimg_set_start_cb(lv_obj_t * obj, lv_anim_start_cb_t start_cb)
+{
+    LV_ASSERT_OBJ(obj, MY_CLASS);
+    lv_animimg_t * animimg = (lv_animimg_t *)obj;
+    lv_anim_set_start_cb(&animimg->anim, start_cb);
+}
+
+void lv_animimg_set_ready_cb(lv_obj_t * obj, lv_anim_start_cb_t ready_cb)
+{
+    LV_ASSERT_OBJ(obj, MY_CLASS);
+    lv_animimg_t * animimg = (lv_animimg_t *)obj;
+    lv_anim_set_ready_cb(&animimg->anim, ready_cb);
 }
 
 /*=====================
@@ -127,12 +171,9 @@ static void lv_animimg_constructor(const lv_obj_class_t * class_p, lv_obj_t * ob
 
 static void index_change(lv_obj_t * obj, int32_t index)
 {
-    lv_coord_t idx;
     lv_animimg_t * animimg = (lv_animimg_t *)obj;
-
-    idx = index % animimg->pic_count;
-
-    lv_img_set_src(obj, animimg->dsc[idx]);
+    index = animimg->pic_count == index ? index - 1 : index;
+    lv_img_set_src(obj, animimg->dsc[index]);
 }
 
 #endif

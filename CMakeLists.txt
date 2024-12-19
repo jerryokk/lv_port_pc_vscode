@@ -22,6 +22,8 @@ endif ()
 
 # 预编译宏定义
 add_definitions(-DLV_BUILD_TEST=0)
+add_definitions(-DLV_USE_VIDEO=0)
+add_definitions(-DLV_USE_AUDIO=0)
 add_definitions(-DUSE_SDL=1)
 
 # 函数：递归添加子目录到全局头文件，root_dir 需要是完整路径
@@ -45,6 +47,7 @@ include_directories(${PROJECT_SOURCE_DIR})
 include_directories(${PROJECT_SOURCE_DIR}/depend/include)
 include_sub_directories_recursively(${PROJECT_SOURCE_DIR}/lvgl)
 include_sub_directories_recursively(${PROJECT_SOURCE_DIR}/lv_drivers)
+include_sub_directories_recursively(${PROJECT_SOURCE_DIR}/ui)
 
 # 源文件集合
 file(GLOB_RECURSE SRCS 
@@ -52,9 +55,13 @@ file(GLOB_RECURSE SRCS
     "lv_drivers/*.cpp" "lv_drivers/*.c"
     "main/src/*.cpp" "main/src/*.c"
 )
+file(GLOB_RECURSE UI_SRCS 
+    "ui/custom/*.cpp" "ui/custom/*.c"
+	"ui/generated/*.cpp" "ui/generated/*.c"
+)
 
 # 创建可执行程序项目
-add_executable(demo ${SRCS})
+add_executable(demo ${SRCS} ${UI_SRCS})
 
 if (WIN32)
 	set(libsdl2_main_a "${PROJECT_SOURCE_DIR}/depend/lib/win64/SDL2main.lib")

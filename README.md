@@ -1,13 +1,18 @@
 # Simulator project for LVGL embedded GUI Library
 
-LVGL v8.3 模拟器，基于以下仓库：
+LVGL v8.3 适配 nxp gui guider 的模拟器，基于以下仓库：
 * https://github.com/lvgl/lv_port_pc_vscode/tree/release/v8
-* https://github.com/lvgl/lvgl/tree/release/v8.3
+* https://github.com/lvgl/lvgl/tree/release/v8.3 -- 不是这个，是基于 nxp 修改的版本
 * https://github.com/lvgl/lv_drivers/tree/release/v8.3
 
 运行方法：
 * VS Code WSLg 环境里：`mkdir build; cd build; cmake ..; make; ./demo`
 * Windows 环境里 VS2019（或以上版本）文件菜单打开 CMake 文件，点击运行 demo.exe
+
+从 nxp gui guider 导出文件到 ui 目录。
+* 修改 SDL_HOR_RES、SDL_VER_RES 调整窗口大小。
+* 设置 LV_USE_PERF_MONITOR 1 开启 cpu 使用率和 fps 帧率显示。
+* 设置 LV_USE_MEM_MONITOR 1 开启内存使用率显示。
 
 --- 以下是原版 README ---
 ---
