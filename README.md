@@ -9,7 +9,6 @@ LVGL v8.3 模拟器，基于以下仓库：
 * VS Code WSLg 环境里：`mkdir build; cd build; cmake ..; make; ./demo`
 * Windows 环境里 VS2019（或以上版本）文件菜单打开 CMake 文件，点击运行 demo.exe
 
----
 --- 以下是原版 README ---
 ---
 
