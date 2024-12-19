@@ -1,0 +1,59 @@
+{
+    "env": {
+        "EnvIncludePath": [
+            "${workspaceFolder}/**",
+            "${workspaceFolder}/depend/include",
+            "${workspaceFolder}/lv_drivers",
+            "${workspaceFolder}/lvgl",
+            "${workspaceFolder}/main"
+        ],
+        "EnvDefines": [
+            "__MY_DEFINE__=1"
+        ]
+    },
+    "configurations": [
+        {
+            "name": "Linux-x64",
+            "intelliSenseMode": "${default}",
+            "includePath": [ "${EnvIncludePath}" ],
+            "defines": [ "${EnvDefines}" ],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "browse": {
+                "path": [ "${EnvIncludePath}" ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            }
+        },
+        {
+            "name": "Linux-arm",
+            "intelliSenseMode": "gcc-arm",
+            "includePath": [ "${EnvIncludePath}" ],
+            "defines": [ "${EnvDefines}" ],
+            "compilerPath": "/home/jerry/public/gcc-linaro-4.9.4-2017.01-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "browse": {
+                "path": [ "${EnvIncludePath}" ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            }
+        },
+        {
+            "name": "Win32",
+            "intelliSenseMode": "${default}",
+            "includePath": [ "${EnvIncludePath}" ],
+            "defines": [ "${EnvDefines}" ],
+            "compilerPath": "D:\\Program Files\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.28.29333\\bin\\Hostx64\\x64\\cl.exe",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "browse": {
+                "path": [ "${EnvIncludePath}" ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            }
+        }
+    ],
+    "version": 4
+}

@@ -1,0 +1,27 @@
+{
+    "tasks": [
+        {
+            "label": "Linux build project for x64(Debug)",
+            "type": "shell",
+            "command": "${workspaceFolder}/scripts/cmake_make.sh",
+            "args": [
+                "debug"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Linux build project for x64(Release)",
+            "type": "shell",
+            "command": "${workspaceFolder}/scripts/cmake_make.sh"
+        },
+        {
+            "label": "Windows build project",
+            "type": "shell",
+            "command": "${workspaceFolder}\\scripts\\cmake_msbuild.bat"
+        }
+    ],
+    "version": "2.0.0"
+}
