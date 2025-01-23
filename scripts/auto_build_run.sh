@@ -87,6 +87,9 @@ while true; do
         "$PrjDir/main" \
         "$PrjDir/lvgl" \
         "$PrjDir/lv_drivers" \
+        "$PrjDir/lv_conf.h" \
+        "$PrjDir/lv_demo_conf.h" \
+        "$PrjDir/lv_drv_conf.h" \
         "$PrjDir/CMakeLists.txt"
         
     # 等待一小段时间，避免文件保存时出现多次触发
