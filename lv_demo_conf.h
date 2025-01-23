@@ -12,12 +12,6 @@
 #ifndef LV_EX_CONF_H
 #define LV_EX_CONF_H
 
-/*====================
-   SIMULATION SETTINGS
- *====================*/
-#define DISP_HOR_RES 800
-#define DISP_VER_RES 600
-
 /*******************
  * GENERAL SETTING
  *******************/
